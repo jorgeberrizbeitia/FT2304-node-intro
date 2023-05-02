@@ -1,11 +1,27 @@
 const express = require('express')
 const app = express() // app será todo el objeto de nuestro servidor
 
+// queremos ejecutar algo SIEMPRE, sin importar cual sea el path
+app.use((req, res, next) => {
+  console.log("ejecutando codigo del middleware")
+  // checkear si el usuario tiene un registro
+  // quiero checkear si el usuario está enviando un credencial
+
+  // la llamada termina aqui.
+
+  // next => continua con el checkeo de rutas
+  next()
+})
+
 // Una ruta que va a escuchar cuando el usuario vaya a el path "/"
 app.get('/', (req, res) => {
 
   // 1. req => toda la info de la solicitud del cliente
   // 2. res => toda la info de la respuesta al cliente
+  console.log("usuario intentar a /")
+  // voy a buscar info de la pagina inicial
+  // voy a buscar la pagina inicial el html
+
 
   // res.send enviar un mensaje sencillo el cliente
   res.send('Respuesta del servidor Express')
@@ -34,8 +50,6 @@ app.get("/friends/:friendName", (req, res) => {
   } else {
     res.send("Lo siento, no tengo más amigos :(")
   }
-
-
 })
 
 const port = 3000
