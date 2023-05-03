@@ -13,6 +13,17 @@ app.use((req, res, next) => {
   next()
 })
 
+// configuraciones del servidor
+app.use( express.static("public") ) // donde estarán ubicados todos los archivos estaticos de mi web
+// elemento estatico TODO lo que pide el HTML
+// css
+// imagenes
+// fuentes
+// videos
+// sonidos
+// ejecutables de JS de manipulación de dom
+// favicon
+
 // Una ruta que va a escuchar cuando el usuario vaya a el path "/"
 app.get('/', (req, res) => {
 
@@ -24,7 +35,7 @@ app.get('/', (req, res) => {
 
 
   // res.send enviar un mensaje sencillo el cliente
-  res.send('Respuesta del servidor Express')
+  res.send('Respuesta despues de instalar nodemon')
 })
 
 // Otra ruta para "/patata"
@@ -51,6 +62,26 @@ app.get("/friends/:friendName", (req, res) => {
     res.send("Lo siento, no tengo más amigos :(")
   }
 })
+
+
+// Rutas que envien archivos de HTML
+app.get("/home", (req, res) => {
+
+  // enviar al cliente una vista de html
+  // si quiero enviar un archivo, sendFile
+  // sendFile debe usar la dirección ABSOLUTA del archivo a enviar usando _dirname
+  console.log(__dirname)
+  res.sendFile(__dirname + "/views/index.html")
+
+})
+
+app.get("/about", (req, res) => {
+
+
+  res.sendFile(__dirname + "/views/about-file.html")
+})
+
+
 
 const port = 3000
 app.listen(port, () => {
